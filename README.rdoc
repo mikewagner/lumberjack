@@ -13,4 +13,4 @@ A server for capturing syslog events and storing them
 
 
 
-Inspired by loggly's loporter
+Inspired by loggly's logporter
