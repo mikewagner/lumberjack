@@ -1,0 +1,44 @@
+#!/usr/bin/env ruby
+$:.unshift File.join( File.dirname(__FILE__), '..', 'lib' )
+
+require 'rubygems'
+require 'optparse'
+require 'yaml'
+require 'lumberjack'
+
+options = {}
+
+opts = OptionParser.new do |opts|
+  opts.banner = <<-EOF
+Usage:
+  Starting:
+    lumberjack [-c <config file>]
+    
+  Querying:
+    lumberjack -v 
+
+  Options:
+EOF
+
+  opts.on("-cCONFIG", "--config-file CONFIG", "Configuration file") do |x|
+    options[:config] = x
+  end
+
+  opts.on("-v", "--version", "Print the version number and exit") do
+    options[:version] = true
+  end
+
+end
+
+opts.parse!
+
+begin
+  if !options[:config] && options[:version]
+    StatMon.version
+  else
+    require 'lumberjack/cli/execute'
+    Lumberjack::CLI::Execute.new(options)
+  end
+rescue Exception => e
+  puts e
+end

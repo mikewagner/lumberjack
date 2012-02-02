@@ -1,0 +1,5 @@
+Lumberjack.listen do |l|
+  l.port       = 3001
+  l.ip         = '0.0.0.0'
+  l.transport  = :udp
+end
