@@ -17,7 +17,7 @@ module Lumberjack
       def receive_data(data)
         peer = get_peername()
         adress, port = nil, nil
-        if peer.is_a?(Array) # new em-netty::Connection.get_peername
+        if peer.is_a?(Array)
           address, port = peer
         else
           port, address = Socket.unpack_sockaddr_in(peer)
@@ -26,13 +26,14 @@ module Lumberjack
       end
 
       def receive_line(address, port, line)
+        p line
         entry = Lumberjack::Entry.new
         entry.address = address
         entry.port    = port
 
         # parse the line and update entry
         @parser.parse(line, entry)
-        p entry
+        p entry.to_hash
       end
 
     end
