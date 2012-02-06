@@ -12,7 +12,8 @@ module Lumberjack
 
   # parsers
   autoload :Syslog3164, 'lumberjack/parser/syslog3164'
-
+  autoload :TimeParser, 'lumberjack/parser/time_parser'
+  
   extend Dispatch
 
 end
