@@ -1,3 +1,5 @@
+require 'lumberjack/parser/time_parser'
+
 module Lumberjack
   module Parser
     class Syslog3164
@@ -32,7 +34,7 @@ module Lumberjack
         m = @parser.match(line)
         if m
           entry.pri = m[1] || '13'
-          entry.timestamp = m[2]
+          entry.timestamp = Lumberjack::Parser::TimeParser.parse(m[2]) || Time.now
           entry.hostname  = m[3]
           entry.message   = m[4]
           true
