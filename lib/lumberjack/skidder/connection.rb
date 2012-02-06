@@ -5,7 +5,8 @@ module Lumberjack
   class Skidder
     class Connection < EventMachine::Connection
 
-      def initialize
+      def initialize(skidder)
+        @skidder = skidder
         super()      
       end
 
@@ -26,14 +27,14 @@ module Lumberjack
       end
 
       def receive_line(address, port, line)
-        p line
         entry = Lumberjack::Entry.new
         entry.address = address
         entry.port    = port
 
         # parse the line and update entry
         @parser.parse(line, entry)
-        p entry.to_hash
+        # save entry
+        @skidder.queue(entry)
       end
 
     end

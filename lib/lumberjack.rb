@@ -2,6 +2,7 @@
 # Make sure you have the correct versions of the gems (see gemspec) in your load path.
 require 'eventmachine'
 require 'logger'
+require 'redis'
 
 module Lumberjack
 
