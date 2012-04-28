@@ -1,5 +1,4 @@
 require 'lumberjack/skidder/connection'
-require 'em-mongo'
 
 module Lumberjack
   class Skidder
